@@ -1,0 +1,35 @@
+.user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 5px 0;
+  background-color: rgb(205, 227, 238);
+  border-bottom: 1px solid gray;
+  transition: 0.5s;
+  &:hover {
+    background-color: darken($color: rgb(205, 227, 238), $amount: 15);
+  }
+}
+
+.user__details {
+  flex-basis: 25%;
+}
+
+.user__btn {
+  margin-left: 10px;
+  text-transform: uppercase;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    border-bottom: 1px solid rgb(35, 60, 76);
+  }
+}
+
+.user__btn--red {
+  color: darkred;
+}
