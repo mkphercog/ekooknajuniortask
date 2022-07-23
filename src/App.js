@@ -6,9 +6,12 @@ import { GET_USERS_URL, INITIAL_CONTEX_USERS_STATE } from "./common/constants";
 
 export const App = () => {
   const [usersData, setUsersData] = useState(INITIAL_CONTEX_USERS_STATE);
+  const [isNewUserDataSend, setIsNewUserDataSend] = useState(false);
   const valueObject = {
     usersData,
     setUsersData,
+    isNewUserDataSend,
+    setIsNewUserDataSend,
   };
 
   useEffect(() => {
@@ -16,6 +19,7 @@ export const App = () => {
       await fetch(GET_USERS_URL)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           setUsersData(data.users);
         })
         .catch((error) => {
@@ -23,7 +27,7 @@ export const App = () => {
           console.log(error);
         });
     })();
-  }, []);
+  }, [isNewUserDataSend]);
 
   return (
     <ContextStorage.Provider value={valueObject}>

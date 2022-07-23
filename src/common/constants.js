@@ -13,3 +13,13 @@ export const INITIAL_CONTEX_USERS_STATE = [
     id: -1,
   },
 ];
+
+export const ADD_USER_CLEAR_DATA = {
+  FIRST_NAME: "",
+  LAST_NAME: "",
+  FIRST_PART_POSTAL_CODE: 47,
+  SECOND_PART_POSTAL_CODE: 400,
+  STREET: "",
+  CITY: "",
+  AGE: 1,
+};
