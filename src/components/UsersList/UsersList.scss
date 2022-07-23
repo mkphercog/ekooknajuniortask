@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  text-align: center;
 }
 
 .list__header {
@@ -10,7 +11,8 @@
   align-items: center;
   width: 100%;
   padding-bottom: 10px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(35, 60, 76);
+  color: rgb(35, 60, 76);
 }
 
 .list__header_description {
@@ -30,8 +32,14 @@
   align-items: center;
   margin-bottom: 5px;
   padding: 5px 0;
-  background-color: lightblue;
+  background-color: rgb(205, 227, 238);
+  // background-color: lightblue;
   border-bottom: 1px solid gray;
+  transition: 0.5s;
+  &:hover {
+    // background-color: darken($color: lightblue, $amount: 5);
+    background-color: darken($color: rgb(205, 227, 238), $amount: 15);
+  }
 }
 
 .list__user_details {
@@ -48,6 +56,6 @@
   transition: 0.5s;
 
   &:hover {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(35, 60, 76);
   }
 }
