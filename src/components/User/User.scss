@@ -1,14 +1,16 @@
+@import "./../../styles/constants.scss";
+
 .user {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 5px;
   padding: 5px 0;
-  background-color: rgb(205, 227, 238);
-  border-bottom: 1px solid gray;
+  background-color: $base-bgc-color;
+  border-bottom: 1px solid $base-font-border-color;
   transition: 0.5s;
   &:hover {
-    background-color: darken($color: rgb(205, 227, 238), $amount: 15);
+    background-color: $bgc-darken-color;
   }
 }
 
@@ -26,10 +28,16 @@
   transition: 0.5s;
 
   &:hover {
-    border-bottom: 1px solid rgb(35, 60, 76);
+    color: $font-border-hover-color;
+    border-bottom: 1px solid $font-border-hover-color;
   }
 }
 
 .user__btn--red {
-  color: darkred;
+  color: $font-border-red;
+
+  &:hover {
+    color: $font-border-hover-lighter-red;
+    border-bottom: 1px solid $font-border-hover-lighter-red;
+  }
 }

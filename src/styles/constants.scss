@@ -1,0 +1,15 @@
+//FONTS and BORDER
+$base-font-border-color: rgb(35, 60, 76);
+$font-border-hover-color: rgba(0, 102, 179, 255);
+$font-border-red: darken(
+  $color: red,
+  $amount: 8,
+);
+$font-border-hover-lighter-red: red;
+
+//BACKGROUNDS
+$base-bgc-color: rgb(205, 227, 238);
+$bgc-darken-color: darken(
+  $color: rgb(205, 227, 238),
+  $amount: 15,
+);

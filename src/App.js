@@ -3,7 +3,6 @@ import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";
 import { ContextStorage } from "./common/ContextStorage";
 import { GET_USERS_URL, INITIAL_CONTEX_USERS_STATE } from "./common/constants";
-import "./App.scss";
 
 export const App = () => {
   const [usersData, setUsersData] = useState(INITIAL_CONTEX_USERS_STATE);

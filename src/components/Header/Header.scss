@@ -1,8 +1,9 @@
+@import "./../../styles/constants.scss";
+
 .header {
   width: 100%;
   height: 10vh;
-  background-color: white;
-  border-bottom: 1px solid rgb(35, 60, 76);
+  border-bottom: 1px solid $base-font-border-color;
 }
 
 .header__wrapper {
@@ -37,7 +38,7 @@
   cursor: pointer;
 
   &:hover {
-    border-bottom: 1px solid rgba(0, 102, 179, 255);
-    color: rgba(0, 102, 179, 255);
+    color: $font-border-hover-color;
+    border-bottom: 1px solid $font-border-hover-color;
   }
 }

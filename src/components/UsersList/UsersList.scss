@@ -1,3 +1,5 @@
+@import "./../../styles/constants.scss";
+
 .list {
   display: flex;
   flex-direction: column;
@@ -11,8 +13,8 @@
   align-items: center;
   width: 100%;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgb(35, 60, 76);
-  color: rgb(35, 60, 76);
+  border-bottom: 1px solid $base-font-border-color;
+  color: $base-font-border-color;
 }
 
 .list__header_description {
