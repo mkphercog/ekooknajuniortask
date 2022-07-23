@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ContextStorage } from "../../ContextStorage";
+import { ContextStorage } from "../../common/ContextStorage";
 import "./UsersList.scss";
 
 export const UsersList = () => {
