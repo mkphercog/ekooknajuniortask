@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { handleInputValue } from "./../addUserHelpers";
+import "./NewUserDetails.scss";
 
 export const NewUserDetails = ({
   firstName,
@@ -10,40 +11,40 @@ export const NewUserDetails = ({
   setLastName,
   setAge,
 }) => (
-  <div className="add_user__wrapper">
-    <label htmlFor="firstName" className="add_user__label">
+  <div className="details__wrapper">
+    <label htmlFor="firstName" className="details__label">
       Imię:
     </label>
     <input
       type="text"
       name="firstName"
-      className="add_user__input"
+      className="details__input"
       value={firstName}
       onChange={(event) => {
         handleInputValue(event, setFirstName);
       }}
     />
 
-    <label htmlFor="lastName" className="add_user__label">
+    <label htmlFor="lastName" className="details__label">
       Nazwisko:
     </label>
     <input
       type="text"
       name="lastName"
-      className="add_user__input"
+      className="details__input"
       value={lastName}
       onChange={(event) => {
         handleInputValue(event, setLastName);
       }}
     />
 
-    <label htmlFor="age" className="add_user__label">
+    <label htmlFor="age" className="details__label">
       Wiek:
     </label>
     <input
       type="number"
       name="age"
-      className="add_user__input"
+      className="details__input"
       value={age}
       onChange={(event) => {
         handleInputValue(event, setAge, true);

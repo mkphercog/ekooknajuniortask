@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { NewUserDetails } from "./NewUserDetails/NewUserDetails";
 import { ADD_USER_URL, ADD_USER_CLEAR_DATA } from "./../../common/constants";
 import { ContextStorage } from "./../../common/ContextStorage";
-import { NewUserAdress } from "./NewUserAdress/NewUserAdress";
+import { NewUserAddress } from "./NewUserAddress/NewUserAddress";
 import {
   handleClearData,
   validateData,
@@ -83,9 +83,9 @@ export const AddUser = () => {
   };
 
   return (
-    <div className="add_user">
-      <h1 className="add_user__title">Dodaj użytkownika</h1>
-      <form action="submit" className="add_user__form">
+    <div className="add-user">
+      <h1 className="add-user__title">Dodaj użytkownika</h1>
+      <form action="submit" className="add-user__form">
         <NewUserDetails
           firstName={firstName}
           lastName={lastName}
@@ -94,7 +94,7 @@ export const AddUser = () => {
           setLastName={setLastName}
           setAge={setAge}
         />
-        <NewUserAdress
+        <NewUserAddress
           firstPartPostalCode={firstPartPostalCode}
           secondPartPostalCode={secondPartPostalCode}
           city={city}
@@ -104,8 +104,14 @@ export const AddUser = () => {
           setCity={setCity}
           setStreet={setStreet}
         />
-        <button onClick={(event) => handleSubmit(event)}>Dodaj</button>
         <button
+          className="add-user__btn"
+          onClick={(event) => handleSubmit(event)}
+        >
+          Dodaj
+        </button>
+        <button
+          className="add-user__btn"
           onClick={(event) =>
             handleClearData(
               event,
@@ -124,8 +130,10 @@ export const AddUser = () => {
       </form>
       {isDataCorrect ? null : (
         <>
-          <h2>Proszę sprawdzić poprawność danych!</h2>
-          <p>
+          <h2 className="add-user__error-title">
+            Proszę sprawdzić poprawność danych!
+          </h2>
+          <p className="add-user__error-description">
             Pola nie mogą być puste i nie mogą przekraczać 100 znaków. Wiek
             został ograniczony do 150 lat. Poprawny kod pocztowy to np. 47-400.
           </p>

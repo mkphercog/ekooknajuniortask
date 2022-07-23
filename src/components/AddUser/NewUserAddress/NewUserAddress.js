@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { handleInputValue } from "./../addUserHelpers";
+import { handleInputValue } from "../addUserHelpers";
+import "./NewUserAddress.scss";
 
-export const NewUserAdress = ({
+export const NewUserAddress = ({
   firstPartPostalCode,
   secondPartPostalCode,
   city,
@@ -12,14 +13,14 @@ export const NewUserAdress = ({
   setCity,
   setStreet,
 }) => (
-  <div className="add_user__wrapper">
-    <label htmlFor="firstPartPostalCode" className="add_user__label">
+  <div className="address__wrapper">
+    <label htmlFor="firstPartPostalCode" className="address__label">
       Kod pocztowy:
     </label>
     <input
       type="number"
       name="firstPartPostalCode"
-      className="add_user__input"
+      className="address__input"
       value={firstPartPostalCode}
       onChange={(event) => {
         handleInputValue(event, setFirstPartPostalCode, true);
@@ -29,32 +30,32 @@ export const NewUserAdress = ({
     <input
       type="number"
       name="secondPartPostalCode"
-      className="add_user__input"
+      className="address__input"
       value={secondPartPostalCode}
       onChange={(event) => {
         handleInputValue(event, setSecondPartPostalCode, true);
       }}
       maxLength="3"
     />
-    <label htmlFor="city" className="add_user__label">
+    <label htmlFor="city" className="address__label">
       Miasto:
     </label>
     <input
       type="text"
       name="city"
-      className="add_user__input"
+      className="address__input"
       value={city}
       onChange={(event) => {
         handleInputValue(event, setCity);
       }}
     />
-    <label htmlFor="street" className="add_user__label">
+    <label htmlFor="street" className="address__label">
       Ulica:
     </label>
     <input
       type="text"
       name="street"
-      className="add_user__input"
+      className="address__input"
       value={street}
       onChange={(event) => {
         handleInputValue(event, setStreet);
@@ -63,7 +64,7 @@ export const NewUserAdress = ({
   </div>
 );
 
-NewUserAdress.propTypes = {
+NewUserAddress.propTypes = {
   firstPartPostalCode: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     .isRequired,
   secondPartPostalCode: PropTypes.oneOfType([

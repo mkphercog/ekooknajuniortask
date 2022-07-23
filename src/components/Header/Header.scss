@@ -30,20 +30,20 @@
   list-style: none;
 }
 
-.header__list_link {
+.header__list-link {
   text-decoration: none;
-}
-
-.header__list_item {
-  margin-left: 10px;
-  padding: 5px 10px;
-  text-transform: uppercase;
   transition: 0.5s;
   border-bottom: 1px solid transparent;
-  cursor: pointer;
 
   &:hover {
     color: $font-border-hover-color;
     border-bottom: 1px solid $font-border-hover-color;
   }
+}
+
+.header__list-item {
+  margin-left: 10px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
