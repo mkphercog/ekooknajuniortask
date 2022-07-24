@@ -1,6 +1,6 @@
-export const GET_USERS_URL = "http://fronttest.ekookna.pl";
-export const ADD_USER_URL = "http://fronttest.ekookna.pl/user";
-export const DELETE_UPDATE_USER_URL = "http://fronttest.ekookna.pl/user/";
+export const GET_USERS_URL = "https://fronttest.ekookna.pl";
+export const ADD_USER_URL = "https://fronttest.ekookna.pl/user";
+export const DELETE_UPDATE_USER_URL = "https://fronttest.ekookna.pl/user/";
 
 export const INITIAL_CONTEX_USERS_STATE = [
   {
