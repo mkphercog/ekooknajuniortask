@@ -23,3 +23,13 @@ export const ADD_USER_CLEAR_DATA = {
   CITY: "",
   AGE: 1,
 };
+
+export const NOT_FOUD_USERS_DATA = {
+  first_name: "BRAK",
+  last_name: "DANYCH",
+  postal_code: "**-***",
+  street: "DANYCH",
+  city: "BRAK",
+  age: 0,
+  id: -1,
+};

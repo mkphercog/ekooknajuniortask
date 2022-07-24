@@ -7,9 +7,22 @@ import { GET_USERS_URL, INITIAL_CONTEX_USERS_STATE } from "./common/constants";
 export const App = () => {
   const [usersData, setUsersData] = useState(INITIAL_CONTEX_USERS_STATE);
   const [isNewUserDataSend, setIsNewUserDataSend] = useState(false);
+  const [filteredUsersData, setFilteredUsersData] = useState([]);
+  const [isFilteredData, setIsFilteredData] = useState(false);
+  const [filteredDataValues, setFilteredDataValues] = useState({
+    searchingLastName: "",
+    searchingAgeFrom: "",
+    searchingAgeTo: "",
+  });
   const valueObject = {
     usersData,
     setUsersData,
+    filteredUsersData,
+    setFilteredUsersData,
+    isFilteredData,
+    setIsFilteredData,
+    filteredDataValues,
+    setFilteredDataValues,
     isNewUserDataSend,
     setIsNewUserDataSend,
   };

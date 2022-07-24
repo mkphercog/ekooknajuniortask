@@ -10,7 +10,7 @@ import "./DeleteUser.scss";
 export const DeleteUser = () => {
   const { id: userID } = useParams();
   const history = useNavigate();
-  const [userData, setUserData] = useState(INITIAL_CONTEX_USERS_STATE[0]);
+  const [userData, setUserData] = useState(...INITIAL_CONTEX_USERS_STATE);
   const { first_name, last_name, postal_code, city, street } = userData;
 
   useEffect(() => {
