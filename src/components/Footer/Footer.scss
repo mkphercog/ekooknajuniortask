@@ -1,0 +1,20 @@
+@import "./../../styles/constants.scss";
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: $footer-height;
+  background-color: $base-bgc-color;
+}
+
+.footer__author {
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.5s;
+  &:hover {
+    color: $font-border-hover-color;
+  }
+}
