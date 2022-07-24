@@ -14,6 +14,8 @@ export const ContextStorage = createContext({
     searchingAgeTo: "",
   },
   setFilteredDataValues: () => {},
+  isFetchError: false,
+  setIsFetchError: () => {},
   isNewUserDataSend: false,
   setIsNewUserDataSend: () => {},
 });

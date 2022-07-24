@@ -14,11 +14,16 @@ import {
   validateData,
   createFormData,
 } from "./addOrUpdateUserHelpers";
+import { ErrorServerMessage } from "./../ErrorServerMessage/ErrorServerMessage";
 import "./AddOrUpdateUser.scss";
 
 export const AddOrUpdateUser = ({ isUpdating = false }) => {
-  const { setIsNewUserDataSend, isNewUserDataSend } =
-    useContext(ContextStorage);
+  const {
+    setIsNewUserDataSend,
+    isNewUserDataSend,
+    isFetchError,
+    setIsFetchError,
+  } = useContext(ContextStorage);
   const { id: userID } = useParams();
   const {
     FIRST_NAME,
@@ -75,20 +80,38 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
   useEffect(() => {
     if (userID && isUpdating) {
       console.log("Pobieram dane");
-      fetch(`${DELETE_UPDATE_USER_URL}${userID}`)
-        .then((response) => response.json())
-        .then(({ user }) => {
-          const firstPartPostalCode = user.postal_code.slice(0, 2);
-          const secondPartPostalCode = user.postal_code.slice(3, 6);
-          setFirstName(user.first_name);
-          setLastName(user.last_name);
-          setAge(user.age);
-          setFirstPartPostalCode(Number(firstPartPostalCode) || 0);
-          setSecondPartPostalCode(Number(secondPartPostalCode) || 0);
-          setCity(user.city);
-          setStreet(user.street);
-        })
-        .catch((error) => console.log(error));
+
+      (async () => {
+        try {
+          await fetch(`${DELETE_UPDATE_USER_URL}${userID}`)
+            .then((res) => {
+              if (res.ok) {
+                console.log(`Aktualizuje użytkownika , id: ${userID}`);
+                console.log(res);
+                setIsFetchError(false);
+                return res.json();
+              } else {
+                setIsFetchError(true);
+              }
+            })
+            .then(({ user }) => {
+              const firstPartPostalCode = user.postal_code.slice(0, 2);
+              const secondPartPostalCode = user.postal_code.slice(3, 6);
+              setFirstName(user.first_name);
+              setLastName(user.last_name);
+              setAge(user.age);
+              setFirstPartPostalCode(Number(firstPartPostalCode) || 0);
+              setSecondPartPostalCode(Number(secondPartPostalCode) || 0);
+              setCity(user.city);
+              setStreet(user.street);
+              setIsFetchError(false);
+            });
+        } catch (error) {
+          console.log("WYSTĄPIŁ BŁĄD!");
+          console.log(error);
+          setIsFetchError(true);
+        }
+      })();
     } else if (!isUpdating) {
       console.log("czyszczę dane");
       setFirstName(FIRST_NAME);
@@ -100,13 +123,13 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
       setStreet(STREET);
       setIsDataCorrect(true);
       setIsDataSend(false);
+      setIsFetchError(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUpdating]);
 
   const handleUpdate = (event) => {
     event.preventDefault();
-    console.log(firstName);
     const isValidateCorrect = validateData(...arrayOfAllDataFromUseState);
 
     if (isValidateCorrect) {
@@ -115,19 +138,33 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
         ...arrayOfAllDataFromUseStateWithFullPostalCode
       );
       //searching for good idea about updating data for now not working... although adding new user with method POST it works :/
-      fetch(`${DELETE_UPDATE_USER_URL}${userID}`, {
-        method: "PUT",
-        body: userData,
-      });
-      // -----------------------------------------------
-      setIsNewUserDataSend(!isNewUserDataSend);
-      handleClearData(event, ...arrayOfAllSettersFromUseState);
-      setIsDataSend(true);
-      console.log("Akutalizacja danych poprawna!");
+      (async () => {
+        try {
+          await fetch(`${DELETE_UPDATE_USER_URL}${userID}`, {
+            method: "PUT",
+            body: userData,
+          }).then((res) => {
+            if (res.ok) {
+              console.log(`Aktualizuje użytkownika , id: ${userID}`);
+              console.log(res);
+              setIsFetchError(false);
+              setIsDataSend(true);
+              setIsNewUserDataSend(!isNewUserDataSend);
+              handleClearData(event, ...arrayOfAllSettersFromUseState);
+            } else {
+              setIsFetchError(true);
+            }
+          });
+        } catch (error) {
+          console.log("WYSTĄPIŁ BŁĄD!");
+          console.log(error);
+          setIsFetchError(true);
+        }
+      })();
     } else {
+      console.log("Sprawdź poprawność danych!");
       setIsDataCorrect(false);
       setIsDataSend(false);
-      console.log("Sprawdź poprawność danych!");
     }
   };
 
@@ -140,18 +177,34 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
       const userData = createFormData(
         ...arrayOfAllDataFromUseStateWithFullPostalCode
       );
-      fetch(ADD_USER_URL, {
-        method: "POST",
-        body: userData,
-      });
-      setIsNewUserDataSend(!isNewUserDataSend);
-      handleClearData(event, ...arrayOfAllSettersFromUseState);
-      setIsDataSend(true);
-      console.log("Nowy dodany!");
+
+      (async () => {
+        try {
+          await fetch(ADD_USER_URL, {
+            method: "POST",
+            body: userData,
+          }).then((res) => {
+            if (res.ok) {
+              console.log(`Dodaje użytkownika`);
+              console.log(res);
+              setIsFetchError(false);
+              setIsDataSend(true);
+              setIsNewUserDataSend(!isNewUserDataSend);
+              handleClearData(event, ...arrayOfAllSettersFromUseState);
+            } else {
+              setIsFetchError(true);
+            }
+          });
+        } catch (error) {
+          console.log("WYSTĄPIŁ BŁĄD!");
+          console.log(error);
+          setIsFetchError(true);
+        }
+      })();
     } else {
+      console.log("Sprawdź poprawność danych!");
       setIsDataCorrect(false);
       setIsDataSend(false);
-      console.log("Sprawdź poprawność danych!");
     }
   };
 
@@ -194,6 +247,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
               handleClearData(event, ...arrayOfAllSettersFromUseState);
               setIsDataCorrect(true);
               setIsDataSend(false);
+              setIsFetchError(false);
             }}
           >
             Wyczyść
@@ -229,6 +283,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
       {isDataSend ? (
         <p className="add-user__correct-sending-info">{`Poprawnie wysłano dane! :)`}</p>
       ) : null}
+      <ErrorServerMessage isFetchError={isFetchError} />
     </div>
   );
 };

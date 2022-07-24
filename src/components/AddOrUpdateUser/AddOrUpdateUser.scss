@@ -53,3 +53,8 @@
   font-weight: bold;
   text-transform: uppercase;
 }
+
+.add-user__fetch-error {
+  margin-top: 10px;
+  color: $font-border-red;
+}

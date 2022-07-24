@@ -15,6 +15,7 @@ export const App = () => {
     searchingAgeFrom: "",
     searchingAgeTo: "",
   });
+  const [isFetchError, setIsFetchError] = useState(false);
   const valueObject = {
     usersData,
     setUsersData,
@@ -24,22 +25,33 @@ export const App = () => {
     setIsFilteredData,
     filteredDataValues,
     setFilteredDataValues,
+    isFetchError,
+    setIsFetchError,
     isNewUserDataSend,
     setIsNewUserDataSend,
   };
 
   useEffect(() => {
     (async () => {
-      await fetch(GET_USERS_URL)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setUsersData(data.users);
-        })
-        .catch((error) => {
-          setUsersData(INITIAL_CONTEX_USERS_STATE);
-          console.log(error);
-        });
+      try {
+        await fetch(GET_USERS_URL)
+          .then((res) => {
+            if (res.ok) {
+              setIsFetchError(false);
+              return res.json();
+            } else {
+              setIsFetchError(true);
+            }
+          })
+          .then((data) => {
+            console.log(data);
+            setUsersData(data.users);
+          });
+      } catch (error) {
+        console.log("WYSTĄPIŁ BŁĄD!");
+        console.log(error);
+        setIsFetchError(true);
+      }
     })();
   }, [isNewUserDataSend]);
 
