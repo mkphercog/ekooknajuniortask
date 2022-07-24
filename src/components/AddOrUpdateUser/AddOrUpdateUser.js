@@ -115,10 +115,10 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
         ...arrayOfAllDataFromUseStateWithFullPostalCode
       );
       //searching for good idea about updating data for now not working... although adding new user with method POST it works :/
-      // fetch(`${DELETE_UPDATE_USER_URL}${userID}`, {
-      //   method: "PUT",
-      //   body: userData,
-      // });
+      fetch(`${DELETE_UPDATE_USER_URL}${userID}`, {
+        method: "PUT",
+        body: userData,
+      });
       // -----------------------------------------------
       setIsNewUserDataSend(!isNewUserDataSend);
       handleClearData(event, ...arrayOfAllSettersFromUseState);
@@ -140,10 +140,10 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
       const userData = createFormData(
         ...arrayOfAllDataFromUseStateWithFullPostalCode
       );
-      // fetch(ADD_USER_URL, {
-      //   method: "POST",
-      //   body: userData,
-      // });
+      fetch(ADD_USER_URL, {
+        method: "POST",
+        body: userData,
+      });
       setIsNewUserDataSend(!isNewUserDataSend);
       handleClearData(event, ...arrayOfAllSettersFromUseState);
       setIsDataSend(true);

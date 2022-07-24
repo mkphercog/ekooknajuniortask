@@ -1,0 +1,43 @@
+@import "./../../styles/constants.scss";
+
+.delete-user {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.delete-user__title {
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.delete-user__question {
+  margin-top: 10px;
+}
+
+.delete-user__span {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+.delete-user__btn-wrapper {
+  margin-top: 40px;
+}
+
+.delete-user__btn {
+  background-color: $base-bgc-color;
+  border: none;
+  text-transform: uppercase;
+  padding: 8px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: $bgc-darken-color;
+  }
+}

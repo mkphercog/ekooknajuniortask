@@ -7,9 +7,6 @@ import "./User.scss";
 export const User = () => {
   const { usersData } = useContext(ContextStorage);
   const history = useNavigate();
-  // const handleUpdate = (id) => {
-  //   console.log(`ID: ${id}`);
-  // };
 
   const renderUsers = usersData
     .map((user) => (
@@ -23,13 +20,19 @@ export const User = () => {
           <button
             className="user__btn"
             onClick={() => {
-              // handleUpdate(user.id);
               history(`${routerPaths.UPDATE_USER}${user.id}`);
             }}
           >
             Aktualizuj
           </button>
-          <button className="user__btn user__btn--red">Usuń</button>
+          <button
+            className="user__btn user__btn--red"
+            onClick={() => {
+              history(`${routerPaths.DELETE_USER}${user.id}`);
+            }}
+          >
+            Usuń
+          </button>
         </div>
       </li>
     ))
