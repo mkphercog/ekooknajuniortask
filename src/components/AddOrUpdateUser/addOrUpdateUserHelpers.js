@@ -1,4 +1,4 @@
-import { ADD_USER_CLEAR_DATA } from "./../../common/constants";
+import { ADD_USER_CLEAR_DATA } from "../../common/constants";
 
 export const handleInputValue = (
   event,

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { handleInputValue } from "../addUserHelpers";
+import { handleInputValue } from "../addOrUpdateUserHelpers";
 import "./NewUserAddress.scss";
 
 export const NewUserAddress = ({
