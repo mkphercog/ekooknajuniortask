@@ -1,0 +1,31 @@
+@import "./../../../styles/constants.scss";
+
+.address__wrapper {
+  flex-grow: 1;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.address__label {
+  margin: 0 10px;
+  text-transform: uppercase;
+}
+
+.address__input {
+  width: 200px;
+  padding-left: 5px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid $base-font-border-color;
+
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid $font-border-hover-color;
+    color: $font-border-hover-color;
+    font-weight: bold;
+  }
+}
+
+.address__input--smaller {
+  width: 70px;
+}

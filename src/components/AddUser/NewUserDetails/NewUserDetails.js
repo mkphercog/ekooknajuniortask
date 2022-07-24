@@ -44,7 +44,7 @@ export const NewUserDetails = ({
     <input
       type="number"
       name="age"
-      className="details__input"
+      className="details__input details__input--smaller"
       value={age}
       onChange={(event) => {
         handleInputValue(event, setAge, true);

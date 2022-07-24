@@ -104,29 +104,32 @@ export const AddUser = () => {
           setCity={setCity}
           setStreet={setStreet}
         />
-        <button
-          className="add-user__btn"
-          onClick={(event) => handleSubmit(event)}
-        >
-          Dodaj
-        </button>
-        <button
-          className="add-user__btn"
-          onClick={(event) =>
-            handleClearData(
-              event,
-              setFirstName,
-              setLastName,
-              setAge,
-              setFirstPartPostalCode,
-              setSecondPartPostalCode,
-              setCity,
-              setStreet
-            )
-          }
-        >
-          Wyczyść
-        </button>
+        <div className="add-user__btn-wrapper">
+          <button
+            className="add-user__btn"
+            onClick={(event) => handleSubmit(event)}
+          >
+            Dodaj
+          </button>
+          <button
+            className="add-user__btn"
+            onClick={(event) => {
+              handleClearData(
+                event,
+                setFirstName,
+                setLastName,
+                setAge,
+                setFirstPartPostalCode,
+                setSecondPartPostalCode,
+                setCity,
+                setStreet
+              );
+              setIsDataCorrect(true);
+            }}
+          >
+            Wyczyść
+          </button>
+        </div>
       </form>
       {isDataCorrect ? null : (
         <>
@@ -134,8 +137,23 @@ export const AddUser = () => {
             Proszę sprawdzić poprawność danych!
           </h2>
           <p className="add-user__error-description">
-            Pola nie mogą być puste i nie mogą przekraczać 100 znaków. Wiek
-            został ograniczony do 150 lat. Poprawny kod pocztowy to np. 47-400.
+            Pola nie mogą być puste i nie mogą przekraczać{" "}
+            <span className="add-user__error-description-bold">100</span>{" "}
+            znaków.
+          </p>
+          <p className="add-user__error-description">
+            Wiek nie może być{" "}
+            <span className="add-user__error-description-bold">
+              niższy niż 1
+            </span>
+            , został również ograniczony do{" "}
+            <span className="add-user__error-description-bold">150 lat</span>.
+          </p>
+
+          <p className="add-user__error-description">
+            Poprawny kod pocztowy to np.{" "}
+            <span className="add-user__error-description-bold">47-400</span>,
+            dwie cyfry przed myślnikiem i trzy cyfry po myślniku.
           </p>
         </>
       )}

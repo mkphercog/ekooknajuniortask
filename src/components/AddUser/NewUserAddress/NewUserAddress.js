@@ -20,7 +20,7 @@ export const NewUserAddress = ({
     <input
       type="number"
       name="firstPartPostalCode"
-      className="address__input"
+      className="address__input address__input--smaller"
       value={firstPartPostalCode}
       onChange={(event) => {
         handleInputValue(event, setFirstPartPostalCode, true);
@@ -30,7 +30,7 @@ export const NewUserAddress = ({
     <input
       type="number"
       name="secondPartPostalCode"
-      className="address__input"
+      className="address__input address__input--smaller"
       value={secondPartPostalCode}
       onChange={(event) => {
         handleInputValue(event, setSecondPartPostalCode, true);

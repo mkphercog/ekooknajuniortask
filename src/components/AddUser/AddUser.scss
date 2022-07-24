@@ -1,18 +1,51 @@
+@import "./../../styles/constants.scss";
+
 .add-user {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
+  // background-color: wheat;
   text-align: center;
 }
 
 .add-user__title {
+  margin: 15px 0 30px;
   text-transform: uppercase;
 }
 
-// .add-user__form {}
+.add-user__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 
-//.add-user__btn{}
+//.add-user__btn-wrapper{}
 
-//.add-user__error-title{}
+.add-user__btn {
+  background-color: $base-bgc-color;
+  border: none;
+  text-transform: uppercase;
+  padding: 8px 15px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.5s;
 
-//.add-user__error-description{}
+  &:hover {
+    background-color: $bgc-darken-color;
+  }
+}
+
+.add-user__error-title {
+  margin: 15px 0;
+  color: $font-border-red;
+}
+
+.add-user__error-description {
+  margin-top: 5px;
+}
+
+.add-user__error-description-bold {
+  font-weight: bold;
+}

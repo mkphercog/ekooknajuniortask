@@ -13,3 +13,7 @@ $bgc-darken-color: darken(
   $color: rgb(205, 227, 238),
   $amount: 15,
 );
+
+//WEB HEIGHTS
+$header-height: 10vh;
+$content-height: calc(100vh - #{$header-height});

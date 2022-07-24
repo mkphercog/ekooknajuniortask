@@ -64,11 +64,13 @@ export const validateData = (
     }
   });
   if (
+    firstPartPostalCode < 0 ||
     firstPartPostalCode >= 100 ||
-    (secondPartPostalCode < 100 && secondPartPostalCode >= 1000)
+    secondPartPostalCode < 100 ||
+    secondPartPostalCode >= 1000
   ) {
     isCorrect = false;
-  } else if (age > 150) {
+  } else if (age < 1 || age > 150) {
     isCorrect = false;
   }
   return isCorrect;
