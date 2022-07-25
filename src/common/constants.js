@@ -1,6 +1,7 @@
 export const GET_USERS_URL = "https://fronttest.ekookna.pl";
 export const ADD_USER_URL = "https://fronttest.ekookna.pl/user";
-export const DELETE_UPDATE_USER_URL = "https://fronttest.ekookna.pl/user/";
+export const GET_DELETE_UPDATE_USER_BY_ID_URL =
+  "https://fronttest.ekookna.pl/user/";
 
 export const ADD_USER_CLEAR_DATA = {
   FIRST_NAME: "",

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { routerPaths } from "./../../common/router";
 import {
-  DELETE_UPDATE_USER_URL,
+  GET_DELETE_UPDATE_USER_BY_ID_URL,
   NOT_FOUD_USERS_DATA,
 } from "./../../common/constants";
 import "./DeleteUser.scss";
@@ -24,7 +24,7 @@ export const DeleteUser = () => {
   useEffect(() => {
     (async () => {
       try {
-        await fetch(`${DELETE_UPDATE_USER_URL}${userID}`)
+        await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`)
           .then((res) => {
             if (res.ok) {
               setIsFetchError(false);
@@ -49,7 +49,7 @@ export const DeleteUser = () => {
   const handleDeleteUser = async () => {
     //searching for good idea about deleting data, for now not working... same problem like with a PUT method
     try {
-      await fetch(`${DELETE_UPDATE_USER_URL}${userID}`, {
+      await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
         method: "DELETE",
       }).then((res) => {
         if (res.ok) {

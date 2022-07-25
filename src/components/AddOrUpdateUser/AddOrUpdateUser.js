@@ -4,7 +4,7 @@ import { NewUserDetails } from "./NewUserDetails/NewUserDetails";
 import { useParams } from "react-router-dom";
 import {
   ADD_USER_URL,
-  DELETE_UPDATE_USER_URL,
+  GET_DELETE_UPDATE_USER_BY_ID_URL,
   ADD_USER_CLEAR_DATA,
 } from "../../common/constants";
 import { ContextStorage } from "../../common/ContextStorage";
@@ -81,7 +81,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     if (userID && isUpdating) {
       (async () => {
         try {
-          await fetch(`${DELETE_UPDATE_USER_URL}${userID}`)
+          await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`)
             .then((res) => {
               if (res.ok) {
                 setIsFetchError(false);
@@ -136,7 +136,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
       //searching for good idea about updating data for now not working... although adding new user with method POST it works :/
       (async () => {
         try {
-          await fetch(`${DELETE_UPDATE_USER_URL}${userID}`, {
+          await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
             method: "PUT",
             body: userData,
           }).then((res) => {
