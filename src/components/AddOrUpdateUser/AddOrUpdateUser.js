@@ -79,15 +79,11 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
 
   useEffect(() => {
     if (userID && isUpdating) {
-      console.log("Pobieram dane");
-
       (async () => {
         try {
           await fetch(`${DELETE_UPDATE_USER_URL}${userID}`)
             .then((res) => {
               if (res.ok) {
-                console.log(`Aktualizuje użytkownika , id: ${userID}`);
-                console.log(res);
                 setIsFetchError(false);
                 return res.json();
               } else {
@@ -128,7 +124,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUpdating]);
 
-  const handleUpdate = (event) => {
+  const handleUpdateUserData = (event) => {
     event.preventDefault();
     const isValidateCorrect = validateData(...arrayOfAllDataFromUseState);
 
@@ -168,7 +164,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleAddNewUser = (event) => {
     event.preventDefault();
     const isValidateCorrect = validateData(...arrayOfAllDataFromUseState);
 
@@ -236,7 +232,9 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
           <button
             className="add-user__btn"
             onClick={(event) => {
-              isUpdating ? handleUpdate(event) : handleSubmit(event);
+              isUpdating
+                ? handleUpdateUserData(event)
+                : handleAddNewUser(event);
             }}
           >
             {isUpdating ? "Aktualizuj" : "Dodaj"}

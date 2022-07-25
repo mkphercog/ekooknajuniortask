@@ -10,7 +10,12 @@ import { ContextStorage } from "../../common/ContextStorage";
 import { ErrorServerMessage } from "./../ErrorServerMessage/ErrorServerMessage";
 
 export const DeleteUser = () => {
-  const { isFetchError, setIsFetchError } = useContext(ContextStorage);
+  const {
+    isFetchError,
+    setIsFetchError,
+    setIsNewUserDataSend,
+    isNewUserDataSend,
+  } = useContext(ContextStorage);
   const { id: userID } = useParams();
   const history = useNavigate();
   const [currentUserData, setCurrentUserData] = useState(NOT_FOUD_USERS_DATA);
@@ -52,6 +57,7 @@ export const DeleteUser = () => {
           console.log(`Usuwam użytkownika , id: ${userID}`);
           console.log(res);
           setIsFetchError(false);
+          setIsNewUserDataSend(!isNewUserDataSend);
         } else {
           setIsFetchError(true);
         }
