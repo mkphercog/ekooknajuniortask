@@ -8,7 +8,11 @@
 .main__wrapper {
   display: flex;
   padding: 10px;
-  width: 90%;
+  width: 100%;
   min-height: $content-height;
   margin: 0 auto;
+
+  @media (min-width: $breakpoint-mid) {
+    width: 90%;
+  }
 }

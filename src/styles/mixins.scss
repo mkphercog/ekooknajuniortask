@@ -3,9 +3,15 @@
 @mixin input-style($width: 200) {
   width: #{$width}px;
   padding-left: 5px;
-  font-size: 16px;
+  margin-top: 20px;
+  font-size: 10px;
   border: none;
   border-bottom: 1px solid $base-font-border-color;
+
+  @media (min-width: $breakpoint-mid) {
+    margin-top: 0;
+    font-size: 16px;
+  }
 
   &:focus {
     outline: none;
@@ -22,11 +28,16 @@
 @mixin button-style {
   background-color: $base-bgc-color;
   border: none;
+  font-size: 10px;
   text-transform: uppercase;
   padding: 8px 15px;
   margin-left: 10px;
   cursor: pointer;
   transition: 0.5s;
+
+  @media (min-width: $breakpoint-mid) {
+    font-size: 16px;
+  }
 
   &:hover {
     background-color: $bgc-darken-color;

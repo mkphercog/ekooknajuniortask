@@ -11,7 +11,12 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
   padding: 10px 0;
+
+  @media (min-width: $breakpoint-mid) {
+    flex-wrap: nowrap;
+  }
 }
 
 .toolbar__label {
@@ -20,11 +25,19 @@
 }
 
 .toolbar__input {
-  @include input-style(150);
+  @include input-style(80);
+
+  @media (min-width: $breakpoint-mid) {
+    @include input-style(150);
+  }
 }
 
 .toolbar__input--smaller {
-  @include input-style--smaller();
+  @include input-style--smaller(40);
+
+  @media (min-width: $breakpoint-mid) {
+    @include input-style--smaller;
+  }
 }
 
 .toolbar__btn {

@@ -13,9 +13,17 @@
 }
 
 .address__input {
-  @include input-style;
+  @include input-style(80);
+
+  @media (min-width: $breakpoint-mid) {
+    @include input-style;
+  }
 }
 
 .address__input--smaller {
-  @include input-style--smaller;
+  @include input-style--smaller(40);
+
+  @media (min-width: $breakpoint-mid) {
+    @include input-style--smaller;
+  }
 }

@@ -9,9 +9,13 @@
 .header__wrapper {
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
+
+  @media (min-width: $breakpoint-mid) {
+    width: 90%;
+  }
 }
 
 .header__logo {
