@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { routerPaths } from "./../../common/router";
+import { routerPaths } from "../../../common/router";
 import "./User.scss";
 
 export const User = ({ user }) => {
