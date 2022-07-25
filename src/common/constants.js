@@ -2,18 +2,6 @@ export const GET_USERS_URL = "https://fronttest.ekookna.pl";
 export const ADD_USER_URL = "https://fronttest.ekookna.pl/user";
 export const DELETE_UPDATE_USER_URL = "https://fronttest.ekookna.pl/user/";
 
-export const INITIAL_CONTEX_USERS_STATE = [
-  {
-    first_name: "",
-    last_name: "",
-    postal_code: "",
-    street: "",
-    city: "",
-    age: 0,
-    id: -1,
-  },
-];
-
 export const ADD_USER_CLEAR_DATA = {
   FIRST_NAME: "",
   LAST_NAME: "",

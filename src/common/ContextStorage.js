@@ -1,5 +1,16 @@
 import { createContext } from "react";
-import { INITIAL_CONTEX_USERS_STATE } from "./constants";
+
+export const INITIAL_CONTEX_USERS_STATE = [
+  {
+    first_name: "",
+    last_name: "",
+    postal_code: "",
+    street: "",
+    city: "",
+    age: 0,
+    id: -1,
+  },
+];
 
 export const ContextStorage = createContext({
   usersData: INITIAL_CONTEX_USERS_STATE,
