@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";
 import { ContextStorage } from "./common/ContextStorage";
-import { GET_USERS_URL, INITIAL_CONTEX_USERS_STATE } from "./common/constants";
+import { GET_USERS_URL, NOT_FOUD_USERS_DATA } from "./common/constants";
 import { Footer } from "./components/Footer/Footer";
 
 export const App = () => {
-  const [usersData, setUsersData] = useState(INITIAL_CONTEX_USERS_STATE);
+  const [usersData, setUsersData] = useState([NOT_FOUD_USERS_DATA]);
   const [isNewUserDataSend, setIsNewUserDataSend] = useState(false);
   const [filteredUsersData, setFilteredUsersData] = useState([]);
   const [isFilteredData, setIsFilteredData] = useState(false);

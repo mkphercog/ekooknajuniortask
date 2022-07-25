@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { routerPaths } from "./../../common/router";
 import {
   DELETE_UPDATE_USER_URL,
-  INITIAL_CONTEX_USERS_STATE,
+  NOT_FOUD_USERS_DATA,
 } from "./../../common/constants";
 import "./DeleteUser.scss";
 import { ContextStorage } from "../../common/ContextStorage";
@@ -13,8 +13,8 @@ export const DeleteUser = () => {
   const { isFetchError, setIsFetchError } = useContext(ContextStorage);
   const { id: userID } = useParams();
   const history = useNavigate();
-  const [userData, setUserData] = useState(...INITIAL_CONTEX_USERS_STATE);
-  const { first_name, last_name, postal_code, city, street } = userData;
+  const [currentUserData, setCurrentUserData] = useState(NOT_FOUD_USERS_DATA);
+  const { first_name, last_name, postal_code, city, street } = currentUserData;
 
   useEffect(() => {
     (async () => {
@@ -29,12 +29,13 @@ export const DeleteUser = () => {
             }
           })
           .then((data) => {
-            setUserData(data.user);
+            setCurrentUserData(data.user);
           });
       } catch (error) {
         console.log("WYSTĄPIŁ BŁĄD!");
         console.log(error);
         setIsFetchError(true);
+        setCurrentUserData(NOT_FOUD_USERS_DATA);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
