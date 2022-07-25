@@ -5,7 +5,7 @@ import "./ErrorServerMessage.scss";
 export const ErrorServerMessage = ({ isFetchError }) =>
   isFetchError ? (
     <p className="error-server-message">
-      Wystąpił problem z połączeniem się do serwera.
+      Wystąpił problem z podłączeniem się do serwera.
     </p>
   ) : null;
 
