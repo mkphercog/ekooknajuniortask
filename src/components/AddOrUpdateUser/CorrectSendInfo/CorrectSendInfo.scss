@@ -1,0 +1,13 @@
+@import "./../../../styles/constants.scss";
+
+.add-user__correct-sending-info {
+  margin-top: 50px;
+  color: green;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.add-user__fetch-error {
+  margin-top: 10px;
+  color: $font-border-red;
+}

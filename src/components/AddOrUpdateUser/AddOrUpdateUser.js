@@ -16,6 +16,8 @@ import {
 } from "./addOrUpdateUserHelpers";
 import { ErrorServerMessage } from "./../ErrorServerMessage/ErrorServerMessage";
 import "./AddOrUpdateUser.scss";
+import { IncorrectInputsDataMessage } from "./IncorrectInputsDataMessage/IncorrectInputsDataMessage";
+import { CorrectSendInfo } from "./CorrectSendInfo/CorrectSendInfo";
 
 export const AddOrUpdateUser = ({ isUpdating = false }) => {
   const {
@@ -252,35 +254,8 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
           </button>
         </div>
       </form>
-      {isDataCorrect ? null : (
-        <>
-          <h2 className="add-user__error-title">
-            Proszę sprawdzić poprawność danych!
-          </h2>
-          <p className="add-user__error-description">
-            Pola nie mogą być puste i nie mogą przekraczać{" "}
-            <span className="add-user__error-description-bold">100</span>{" "}
-            znaków.
-          </p>
-          <p className="add-user__error-description">
-            Wiek nie może być{" "}
-            <span className="add-user__error-description-bold">
-              niższy niż 1
-            </span>
-            , został również ograniczony do{" "}
-            <span className="add-user__error-description-bold">150 lat</span>.
-          </p>
-
-          <p className="add-user__error-description">
-            Poprawny kod pocztowy to np.{" "}
-            <span className="add-user__error-description-bold">47-400</span>,
-            dwie cyfry przed myślnikiem i trzy cyfry po myślniku.
-          </p>
-        </>
-      )}
-      {isDataSend ? (
-        <p className="add-user__correct-sending-info">{`Poprawnie wysłano dane! :)`}</p>
-      ) : null}
+      <IncorrectInputsDataMessage isDataCorrect={isDataCorrect} />
+      <CorrectSendInfo isDataSend={isDataSend} />
       <ErrorServerMessage isFetchError={isFetchError} />
     </div>
   );

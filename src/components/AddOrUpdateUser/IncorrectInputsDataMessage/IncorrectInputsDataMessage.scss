@@ -1,0 +1,14 @@
+@import "./../../../styles/constants.scss";
+
+.add-user__error-title {
+  margin: 15px 0;
+  color: $font-border-red;
+}
+
+.add-user__error-description {
+  margin-top: 5px;
+}
+
+.add-user__error-description-bold {
+  font-weight: bold;
+}

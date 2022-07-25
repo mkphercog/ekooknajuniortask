@@ -24,28 +24,3 @@
 .add-user__btn {
   @include button-style;
 }
-
-.add-user__error-title {
-  margin: 15px 0;
-  color: $font-border-red;
-}
-
-.add-user__error-description {
-  margin-top: 5px;
-}
-
-.add-user__error-description-bold {
-  font-weight: bold;
-}
-
-.add-user__correct-sending-info {
-  margin-top: 50px;
-  color: green;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.add-user__fetch-error {
-  margin-top: 10px;
-  color: $font-border-red;
-}
