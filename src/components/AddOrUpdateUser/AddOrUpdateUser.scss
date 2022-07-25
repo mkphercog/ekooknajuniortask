@@ -1,4 +1,5 @@
 @import "./../../styles/constants.scss";
+@import "./../../styles/mixins.scss";
 
 .add-user {
   flex-grow: 1;
@@ -21,17 +22,7 @@
 }
 
 .add-user__btn {
-  background-color: $base-bgc-color;
-  border: none;
-  text-transform: uppercase;
-  padding: 8px 15px;
-  margin-left: 10px;
-  cursor: pointer;
-  transition: 0.5s;
-
-  &:hover {
-    background-color: $bgc-darken-color;
-  }
+  @include button-style;
 }
 
 .add-user__error-title {

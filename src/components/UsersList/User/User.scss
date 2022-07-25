@@ -1,4 +1,5 @@
 @import "./../../../styles/constants.scss";
+@import "./../../../styles/mixins.scss";
 
 .user {
   display: flex;
@@ -9,6 +10,7 @@
   background-color: $base-bgc-color;
   border-bottom: 1px solid $base-font-border-color;
   transition: 0.5s;
+
   &:hover {
     background-color: $bgc-darken-color;
   }
