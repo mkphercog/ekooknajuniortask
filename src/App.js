@@ -4,6 +4,7 @@ import { Main } from "./components/Main/Main";
 import { ContextStorage } from "./common/ContextStorage";
 import { GET_USERS_URL, NOT_FOUD_USERS_DATA } from "./common/constants";
 import { Footer } from "./components/Footer/Footer";
+import { ScrollUp } from "./components/ScrollUp/ScrollUp";
 
 export const App = () => {
   const [usersData, setUsersData] = useState([NOT_FOUD_USERS_DATA]);
@@ -44,7 +45,6 @@ export const App = () => {
             }
           })
           .then((data) => {
-            console.log("Lista pobrana");
             setUsersData(data.users);
           });
       } catch (error) {
@@ -58,6 +58,7 @@ export const App = () => {
       <Header />
       <Main />
       <Footer />
+      <ScrollUp />
     </ContextStorage.Provider>
   );
 };

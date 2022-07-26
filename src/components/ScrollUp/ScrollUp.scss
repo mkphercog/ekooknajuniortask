@@ -1,0 +1,51 @@
+@import "./../../styles/constants.scss";
+@import "./../../styles/mixins.scss";
+
+.scroll-up {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  @include button-style;
+  padding: 7px 10px;
+  background-color: rgba(0, 102, 179, 0.8);
+
+  @media (min-width: $breakpoint-mid) {
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+.scroll-up__arrow {
+  font-size: 16px;
+  color: white;
+
+  @media (min-width: $breakpoint-mid) {
+    font-size: 25px;
+  }
+}
+
+@keyframes show {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes hide {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+.scroll-up__show {
+  animation: show 0.5s both;
+}
+
+.scroll-up__hide {
+  animation: hide 0.5s both;
+}
