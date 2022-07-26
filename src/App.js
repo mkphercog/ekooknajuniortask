@@ -44,12 +44,9 @@ export const App = () => {
             }
           })
           .then((data) => {
-            console.log(data);
             setUsersData(data.users);
           });
       } catch (error) {
-        console.log("WYSTĄPIŁ BŁĄD!");
-        console.log(error);
         setIsFetchError(true);
       }
     })();

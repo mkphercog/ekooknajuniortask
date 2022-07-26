@@ -105,13 +105,10 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
               setIsFetchError(false);
             });
         } catch (error) {
-          console.log("WYSTĄPIŁ BŁĄD!");
-          console.log(error);
           setIsFetchError(true);
         }
       })();
     } else if (!isUpdating) {
-      console.log("czyszczę dane");
       setFirstName(FIRST_NAME);
       setLastName(LAST_NAME);
       setAge(AGE);
@@ -136,6 +133,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
         ...arrayOfAllDataFromUseStateWithFullPostalCode
       );
       //searching for good idea about updating data for now not working... although adding new user with method POST it works :/
+      //maybe some problem with server?
       (async () => {
         try {
           await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
@@ -143,8 +141,6 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
             body: userData,
           }).then((res) => {
             if (res.ok) {
-              console.log(`Aktualizuje użytkownika , id: ${userID}`);
-              console.log(res);
               setIsFetchError(false);
               setIsDataSend(true);
               setIsNewUserDataSend(!isNewUserDataSend);
@@ -154,13 +150,10 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
             }
           });
         } catch (error) {
-          console.log("WYSTĄPIŁ BŁĄD!");
-          console.log(error);
           setIsFetchError(true);
         }
       })();
     } else {
-      console.log("Sprawdź poprawność danych!");
       setIsDataCorrect(false);
       setIsDataSend(false);
     }
@@ -183,8 +176,6 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
             body: userData,
           }).then((res) => {
             if (res.ok) {
-              console.log(`Dodaje użytkownika`);
-              console.log(res);
               setIsFetchError(false);
               setIsDataSend(true);
               setIsNewUserDataSend(!isNewUserDataSend);
@@ -194,13 +185,10 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
             }
           });
         } catch (error) {
-          console.log("WYSTĄPIŁ BŁĄD!");
-          console.log(error);
           setIsFetchError(true);
         }
       })();
     } else {
-      console.log("Sprawdź poprawność danych!");
       setIsDataCorrect(false);
       setIsDataSend(false);
     }

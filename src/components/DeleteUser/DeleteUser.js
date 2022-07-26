@@ -37,8 +37,6 @@ export const DeleteUser = () => {
             setCurrentUserData(data.user);
           });
       } catch (error) {
-        console.log("WYSTĄPIŁ BŁĄD!");
-        console.log(error);
         setIsFetchError(true);
         setCurrentUserData(NOT_FOUD_USERS_DATA);
       }
@@ -54,8 +52,6 @@ export const DeleteUser = () => {
       }).then((res) => {
         if (res.ok) {
           history(routerPaths.HOME);
-          console.log(`Usuwam użytkownika , id: ${userID}`);
-          console.log(res);
           setIsFetchError(false);
           setIsNewUserDataSend(!isNewUserDataSend);
         } else {
@@ -63,8 +59,6 @@ export const DeleteUser = () => {
         }
       });
     } catch (error) {
-      console.log("WYSTĄPIŁ BŁĄD!");
-      console.log(error);
       setIsFetchError(true);
     }
   };
