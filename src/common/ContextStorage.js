@@ -27,6 +27,6 @@ export const ContextStorage = createContext({
   setFilteredDataValues: () => {},
   isFetchError: false,
   setIsFetchError: () => {},
-  isNewUserDataSend: false,
-  setIsNewUserDataSend: () => {},
+  changedServerDataFlag: false,
+  setchangedServerDataFlag: () => {},
 });

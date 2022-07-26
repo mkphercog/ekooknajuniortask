@@ -15,15 +15,16 @@ export const SearchingToolbar = () => {
   const { searchingLastName, searchingAgeFrom, searchingAgeTo } =
     filteredDataValues;
 
-  const handleFilterByLastName = () => {
+  const handleSubmit = () => {
     const filteredUsers = getFilteredUsers(
       usersData,
       searchingLastName,
       searchingAgeFrom,
       searchingAgeTo
     );
-    setIsFilteredData(true);
+
     if (filteredUsers.length) {
+      setIsFilteredData(true);
       setFilteredUsersData(filteredUsers);
     } else {
       setFilteredUsersData([NOT_FOUD_USERS_DATA]);
@@ -91,7 +92,7 @@ export const SearchingToolbar = () => {
           className="toolbar__btn"
           onClick={(event) => {
             event.preventDefault();
-            handleFilterByLastName();
+            handleSubmit();
           }}
         >
           Szukaj

@@ -35,7 +35,6 @@ export const NewUserAddress = ({
       onChange={(event) => {
         handleInputValue(event, setSecondPartPostalCode, true);
       }}
-      maxLength="3"
     />
     <label htmlFor="city" className="address__label">
       Miasto:

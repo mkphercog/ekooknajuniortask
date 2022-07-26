@@ -26,5 +26,6 @@ export const getFilteredUsers = (
     }
     return user;
   });
+
   return filteredUsers;
 };

@@ -7,7 +7,7 @@ import { Footer } from "./components/Footer/Footer";
 
 export const App = () => {
   const [usersData, setUsersData] = useState([NOT_FOUD_USERS_DATA]);
-  const [isNewUserDataSend, setIsNewUserDataSend] = useState(false);
+  const [changedServerDataFlag, setChangedServerDataFlag] = useState(false);
   const [filteredUsersData, setFilteredUsersData] = useState([]);
   const [isFilteredData, setIsFilteredData] = useState(false);
   const [filteredDataValues, setFilteredDataValues] = useState({
@@ -27,8 +27,8 @@ export const App = () => {
     setFilteredDataValues,
     isFetchError,
     setIsFetchError,
-    isNewUserDataSend,
-    setIsNewUserDataSend,
+    changedServerDataFlag,
+    setChangedServerDataFlag,
   };
 
   useEffect(() => {
@@ -44,13 +44,14 @@ export const App = () => {
             }
           })
           .then((data) => {
+            console.log("Lista pobrana");
             setUsersData(data.users);
           });
       } catch (error) {
         setIsFetchError(true);
       }
     })();
-  }, [isNewUserDataSend]);
+  }, [changedServerDataFlag]);
 
   return (
     <ContextStorage.Provider value={valueObject}>

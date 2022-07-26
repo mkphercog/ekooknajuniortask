@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import { UsersList } from "../UsersList/UsersList";
 import { AddOrUpdateUser } from "../AddOrUpdateUser/AddOrUpdateUser";
 import { ErrorPage } from "./../ErrorPage/ErrorPage";
-import { routerPaths } from "./../../common/router";
 import { DeleteUser } from "../DeleteUser/DeleteUser";
+import { routerPaths } from "./../../common/router";
 import "./Main.scss";
 
 export const Main = () => {

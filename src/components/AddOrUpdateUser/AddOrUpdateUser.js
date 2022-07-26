@@ -1,28 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { NewUserDetails } from "./NewUserDetails/NewUserDetails";
 import { useParams } from "react-router-dom";
+import { NewUserDetails } from "./NewUserDetails/NewUserDetails";
+import { NewUserAddress } from "./NewUserAddress/NewUserAddress";
+import { ErrorServerMessage } from "./../ErrorServerMessage/ErrorServerMessage";
+import { IncorrectInputsDataMessage } from "./IncorrectInputsDataMessage/IncorrectInputsDataMessage";
+import { CorrectSendInfo } from "./CorrectSendInfo/CorrectSendInfo";
 import {
   ADD_USER_URL,
   GET_DELETE_UPDATE_USER_BY_ID_URL,
   ADD_USER_CLEAR_DATA,
 } from "../../common/constants";
-import { ContextStorage } from "../../common/ContextStorage";
-import { NewUserAddress } from "./NewUserAddress/NewUserAddress";
 import {
   handleClearData,
   validateData,
   createFormData,
 } from "./addOrUpdateUserHelpers";
-import { ErrorServerMessage } from "./../ErrorServerMessage/ErrorServerMessage";
+import { ContextStorage } from "../../common/ContextStorage";
 import "./AddOrUpdateUser.scss";
-import { IncorrectInputsDataMessage } from "./IncorrectInputsDataMessage/IncorrectInputsDataMessage";
-import { CorrectSendInfo } from "./CorrectSendInfo/CorrectSendInfo";
 
 export const AddOrUpdateUser = ({ isUpdating = false }) => {
   const {
-    setIsNewUserDataSend,
-    isNewUserDataSend,
+    changedServerDataFlag,
+    setChangedServerDataFlag,
     isFetchError,
     setIsFetchError,
   } = useContext(ContextStorage);
@@ -36,7 +36,6 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     STREET,
     AGE,
   } = ADD_USER_CLEAR_DATA;
-
   const [firstName, setFirstName] = useState(FIRST_NAME);
   const [lastName, setLastName] = useState(LAST_NAME);
   const [age, setAge] = useState(AGE);
@@ -48,11 +47,10 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
   );
   const [city, setCity] = useState(CITY);
   const [street, setStreet] = useState(STREET);
-
   const [isDataCorrect, setIsDataCorrect] = useState(true);
   const [isDataSend, setIsDataSend] = useState(false);
   const fullPostalCode = `${firstPartPostalCode}-${secondPartPostalCode}`;
-  const arrayOfAllSettersFromUseState = [
+  const arrayOfAllSettersForUserData = [
     setFirstName,
     setLastName,
     setAge,
@@ -61,7 +59,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     setCity,
     setStreet,
   ];
-  const arrayOfAllDataFromUseState = [
+  const arrayOfAllUserDataFromUseState = [
     firstName,
     lastName,
     age,
@@ -70,7 +68,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     city,
     street,
   ];
-  const arrayOfAllDataFromUseStateWithFullPostalCode = [
+  const arrayOfAllUserDataFromUseStateWithFullPostalCode = [
     firstName,
     lastName,
     age,
@@ -123,28 +121,26 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUpdating]);
 
-  const handleUpdateUserData = (event) => {
+  const handleAddNewUser = (event) => {
     event.preventDefault();
-    const isValidateCorrect = validateData(...arrayOfAllDataFromUseState);
+    const isValidateCorrect = validateData(...arrayOfAllUserDataFromUseState);
 
     if (isValidateCorrect) {
       setIsDataCorrect(true);
       const userData = createFormData(
-        ...arrayOfAllDataFromUseStateWithFullPostalCode
+        ...arrayOfAllUserDataFromUseStateWithFullPostalCode
       );
-      //searching for good idea about updating data for now not working... although adding new user with method POST it works :/
-      //maybe some problem with server?
       (async () => {
         try {
-          await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
-            method: "PUT",
+          await fetch(ADD_USER_URL, {
+            method: "POST",
             body: userData,
           }).then((res) => {
             if (res.ok) {
-              setIsFetchError(false);
               setIsDataSend(true);
-              setIsNewUserDataSend(!isNewUserDataSend);
-              handleClearData(event, ...arrayOfAllSettersFromUseState);
+              setIsFetchError(false);
+              setChangedServerDataFlag(!changedServerDataFlag);
+              handleClearData(event, ...arrayOfAllSettersForUserData);
             } else {
               setIsFetchError(true);
             }
@@ -159,27 +155,28 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     }
   };
 
-  const handleAddNewUser = (event) => {
+  const handleUpdateUserData = (event) => {
     event.preventDefault();
-    const isValidateCorrect = validateData(...arrayOfAllDataFromUseState);
+    const isValidateCorrect = validateData(...arrayOfAllUserDataFromUseState);
 
     if (isValidateCorrect) {
       setIsDataCorrect(true);
       const userData = createFormData(
-        ...arrayOfAllDataFromUseStateWithFullPostalCode
+        ...arrayOfAllUserDataFromUseStateWithFullPostalCode
       );
-
+      //searching for good idea about updating data for now not working... although adding new user with method POST it works :/
+      //maybe some problem with server?
       (async () => {
         try {
-          await fetch(ADD_USER_URL, {
-            method: "POST",
+          await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
+            method: "PUT",
             body: userData,
           }).then((res) => {
             if (res.ok) {
               setIsFetchError(false);
               setIsDataSend(true);
-              setIsNewUserDataSend(!isNewUserDataSend);
-              handleClearData(event, ...arrayOfAllSettersFromUseState);
+              setChangedServerDataFlag(!changedServerDataFlag);
+              handleClearData(event, ...arrayOfAllSettersForUserData);
             } else {
               setIsFetchError(true);
             }
@@ -232,7 +229,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
           <button
             className="add-user__btn"
             onClick={(event) => {
-              handleClearData(event, ...arrayOfAllSettersFromUseState);
+              handleClearData(event, ...arrayOfAllSettersForUserData);
               setIsDataCorrect(true);
               setIsDataSend(false);
               setIsFetchError(false);

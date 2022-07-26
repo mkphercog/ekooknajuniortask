@@ -5,16 +5,16 @@ import {
   GET_DELETE_UPDATE_USER_BY_ID_URL,
   NOT_FOUD_USERS_DATA,
 } from "./../../common/constants";
-import "./DeleteUser.scss";
 import { ContextStorage } from "../../common/ContextStorage";
 import { ErrorServerMessage } from "./../ErrorServerMessage/ErrorServerMessage";
+import "./DeleteUser.scss";
 
 export const DeleteUser = () => {
   const {
     isFetchError,
     setIsFetchError,
-    setIsNewUserDataSend,
-    isNewUserDataSend,
+    changedServerDataFlag,
+    setChangedServerDataFlag,
   } = useContext(ContextStorage);
   const { id: userID } = useParams();
   const history = useNavigate();
@@ -51,9 +51,9 @@ export const DeleteUser = () => {
         method: "DELETE",
       }).then((res) => {
         if (res.ok) {
-          history(routerPaths.HOME);
           setIsFetchError(false);
-          setIsNewUserDataSend(!isNewUserDataSend);
+          setChangedServerDataFlag(!changedServerDataFlag);
+          history(routerPaths.HOME);
         } else {
           setIsFetchError(true);
         }
@@ -84,7 +84,7 @@ export const DeleteUser = () => {
           className="delete-user__btn"
           onClick={() => history(routerPaths.HOME)}
         >
-          Nie usuwaj
+          Anuluj
         </button>
       </div>
       <ErrorServerMessage isFetchError={isFetchError} />

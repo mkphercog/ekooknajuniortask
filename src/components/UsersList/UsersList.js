@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { ContextStorage } from "../../common/ContextStorage";
 import { User } from "./User/User";
+import { ContextStorage } from "../../common/ContextStorage";
 import { SearchingToolbar } from "./SearchingToolbar/SearchingToolbar";
 import "./UsersList.scss";
 
 export const UsersList = () => {
   const { usersData, filteredUsersData, isFilteredData } =
     useContext(ContextStorage);
-  const isFilteredUsersData = isFilteredData ? filteredUsersData : usersData;
+  const users = isFilteredData ? filteredUsersData : usersData;
 
-  const renderUsers = isFilteredUsersData
+  const renderUsers = users
     .map((user) => <User key={user.id} user={user} />)
     .reverse();
 

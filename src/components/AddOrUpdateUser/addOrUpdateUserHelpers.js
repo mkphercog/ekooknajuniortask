@@ -1,5 +1,35 @@
 import { ADD_USER_CLEAR_DATA } from "../../common/constants";
 
+export const handleClearData = (
+  event,
+  setFirstName,
+  setLastName,
+  setAge,
+  setFirstPartPostalCode,
+  setSecondPartPostalCode,
+  setCity,
+  setStreet
+) => {
+  const {
+    FIRST_NAME,
+    LAST_NAME,
+    FIRST_PART_POSTAL_CODE,
+    SECOND_PART_POSTAL_CODE,
+    CITY,
+    STREET,
+    AGE,
+  } = ADD_USER_CLEAR_DATA;
+
+  event.preventDefault();
+  setFirstName(FIRST_NAME);
+  setLastName(LAST_NAME);
+  setAge(AGE);
+  setFirstPartPostalCode(FIRST_PART_POSTAL_CODE);
+  setSecondPartPostalCode(SECOND_PART_POSTAL_CODE);
+  setCity(CITY);
+  setStreet(STREET);
+};
+
 export const handleInputValue = (
   event,
   setterInputValueFunction,
@@ -15,36 +45,6 @@ export const handleInputValue = (
   } else {
     setterInputValueFunction(inputValue);
   }
-};
-
-const {
-  FIRST_NAME,
-  LAST_NAME,
-  FIRST_PART_POSTAL_CODE,
-  SECOND_PART_POSTAL_CODE,
-  CITY,
-  STREET,
-  AGE,
-} = ADD_USER_CLEAR_DATA;
-
-export const handleClearData = (
-  event,
-  setFirstName,
-  setLastName,
-  setAge,
-  setFirstPartPostalCode,
-  setSecondPartPostalCode,
-  setCity,
-  setStreet
-) => {
-  event.preventDefault();
-  setFirstName(FIRST_NAME);
-  setLastName(LAST_NAME);
-  setAge(AGE);
-  setFirstPartPostalCode(FIRST_PART_POSTAL_CODE);
-  setSecondPartPostalCode(SECOND_PART_POSTAL_CODE);
-  setCity(CITY);
-  setStreet(STREET);
 };
 
 export const validateData = (
@@ -73,6 +73,7 @@ export const validateData = (
   } else if (age < 1 || age > 150) {
     isCorrect = false;
   }
+
   return isCorrect;
 };
 
