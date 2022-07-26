@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/ekooknajuniortask/static/css/main.72bb34f6.css",
+    "main.css": "/ekooknajuniortask/static/css/main.8d7e44ef.css",
     "main.js": "/ekooknajuniortask/static/js/main.cd38f2dc.js",
     "static/js/787.c2c302f8.chunk.js": "/ekooknajuniortask/static/js/787.c2c302f8.chunk.js",
     "static/media/EkoOknaLogo.png": "/ekooknajuniortask/static/media/EkoOknaLogo.3e42eeabfa5271ea503d.png",
     "index.html": "/ekooknajuniortask/index.html",
-    "main.72bb34f6.css.map": "/ekooknajuniortask/static/css/main.72bb34f6.css.map",
+    "main.8d7e44ef.css.map": "/ekooknajuniortask/static/css/main.8d7e44ef.css.map",
     "main.cd38f2dc.js.map": "/ekooknajuniortask/static/js/main.cd38f2dc.js.map",
     "787.c2c302f8.chunk.js.map": "/ekooknajuniortask/static/js/787.c2c302f8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.72bb34f6.css",
+    "static/css/main.8d7e44ef.css",
     "static/js/main.cd38f2dc.js"
   ]
 }
