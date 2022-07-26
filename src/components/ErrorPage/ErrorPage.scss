@@ -20,8 +20,10 @@
   border-bottom: 1px solid transparent;
   transition: 0.5s;
 
-  &:hover {
-    border-bottom: 1px solid;
-    color: $font-border-hover-color;
+  @media (min-width: $breakpoint-mid) {
+    &:hover {
+      border-bottom: 1px solid;
+      color: $font-border-hover-color;
+    }
   }
 }

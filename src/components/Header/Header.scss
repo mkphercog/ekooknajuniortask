@@ -39,9 +39,11 @@
   transition: 0.5s;
   border-bottom: 1px solid transparent;
 
-  &:hover {
-    color: $font-border-hover-color;
-    border-bottom: 1px solid $font-border-hover-color;
+  @media (min-width: $breakpoint-mid) {
+    &:hover {
+      color: $font-border-hover-color;
+      border-bottom: 1px solid $font-border-hover-color;
+    }
   }
 }
 

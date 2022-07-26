@@ -15,7 +15,9 @@
   font-weight: bold;
   transition: 0.5s;
 
-  &:hover {
-    color: $font-border-hover-color;
+  @media (min-width: $breakpoint-mid) {
+    &:hover {
+      color: $font-border-hover-color;
+    }
   }
 }
