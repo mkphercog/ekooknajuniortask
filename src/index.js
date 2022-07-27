@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import { HashRouter } from "react-router-dom";
-import { routerPaths } from "./common/router";
+import { routerPaths } from "./router/routerPaths";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 

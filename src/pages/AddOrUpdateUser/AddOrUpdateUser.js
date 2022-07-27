@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { NewUserDetails } from "./NewUserDetails/NewUserDetails";
 import { NewUserAddress } from "./NewUserAddress/NewUserAddress";
-import { ErrorServerMessage } from "./../ErrorServerMessage/ErrorServerMessage";
+import { ErrorServerMessage } from "./../../components/ErrorServerMessage/ErrorServerMessage";
 import { IncorrectInputsDataMessage } from "./IncorrectInputsDataMessage/IncorrectInputsDataMessage";
 import { CorrectSendInfo } from "./CorrectSendInfo/CorrectSendInfo";
 import {
@@ -164,7 +164,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
       const userData = createFormData(
         ...arrayOfAllUserDataFromUseStateWithFullPostalCode
       );
-      //searching for good idea about updating data for now not working... although adding new user with method POST it works :/
+      //searching for good idea about updating data, for now not working... although adding new user with method POST works :/
       //maybe some problem with server?
       (async () => {
         try {

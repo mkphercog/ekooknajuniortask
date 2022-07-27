@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { routerPaths } from "./../../common/router";
+import { routerPaths } from "../../router/routerPaths";
 import {
   GET_DELETE_UPDATE_USER_BY_ID_URL,
   NOT_FOUD_USERS_DATA,
-} from "./../../common/constants";
+} from "../../common/constants";
 import { ContextStorage } from "../../storage/ContextStorage";
-import { ErrorServerMessage } from "./../ErrorServerMessage/ErrorServerMessage";
+import { ErrorServerMessage } from "../../components/ErrorServerMessage/ErrorServerMessage";
 import "./DeleteUser.scss";
 
 export const DeleteUser = () => {
@@ -46,6 +46,7 @@ export const DeleteUser = () => {
 
   const handleDeleteUser = async () => {
     //searching for good idea about deleting data, for now not working... same problem like with a PUT method
+    //maybe some problem with server?
     try {
       await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
         method: "DELETE",

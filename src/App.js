@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { Header } from "./components/Header/Header";
-import { Main } from "./components/Main/Main";
 import { ContextStorage } from "./storage/ContextStorage";
 import { GET_USERS_URL, NOT_FOUD_USERS_DATA } from "./common/constants";
-import { Footer } from "./components/Footer/Footer";
-import { ScrollUp } from "./components/ScrollUp/ScrollUp";
+import { Layout } from "./components/Layout/Layout";
+import { Router } from "./router/Router";
 
 export const App = () => {
   const [usersData, setUsersData] = useState([NOT_FOUD_USERS_DATA]);
@@ -55,10 +53,9 @@ export const App = () => {
 
   return (
     <ContextStorage.Provider value={contextValues}>
-      <Header />
-      <Main />
-      <Footer />
-      <ScrollUp />
+      <Layout>
+        <Router />
+      </Layout>
     </ContextStorage.Provider>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { routerPaths } from "./../../common/router";
+import { routerPaths } from "../../router/routerPaths";
 import "./ErrorPage.scss";
 
 export const ErrorPage = () => (
