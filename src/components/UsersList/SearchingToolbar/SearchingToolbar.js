@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ContextStorage } from "./../../../common/ContextStorage";
+import { ContextStorage } from "./../../../storage/ContextStorage";
 import { NOT_FOUD_USERS_DATA } from "./../../../common/constants";
 import { getFilteredUsers } from "./searchingToolbarFunc";
 import "./SearchingToolbar.scss";

@@ -5,7 +5,7 @@ import {
   GET_DELETE_UPDATE_USER_BY_ID_URL,
   NOT_FOUD_USERS_DATA,
 } from "./../../common/constants";
-import { ContextStorage } from "../../common/ContextStorage";
+import { ContextStorage } from "../../storage/ContextStorage";
 import { ErrorServerMessage } from "./../ErrorServerMessage/ErrorServerMessage";
 import "./DeleteUser.scss";
 

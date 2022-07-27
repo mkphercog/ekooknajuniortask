@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "./components/Header/Header";
 import { Main } from "./components/Main/Main";
-import { ContextStorage } from "./common/ContextStorage";
+import { ContextStorage } from "./storage/ContextStorage";
 import { GET_USERS_URL, NOT_FOUD_USERS_DATA } from "./common/constants";
 import { Footer } from "./components/Footer/Footer";
 import { ScrollUp } from "./components/ScrollUp/ScrollUp";
@@ -17,7 +17,7 @@ export const App = () => {
     searchingAgeTo: "",
   });
   const [isFetchError, setIsFetchError] = useState(false);
-  const valueObject = {
+  const contextValues = {
     usersData,
     setUsersData,
     filteredUsersData,
@@ -54,7 +54,7 @@ export const App = () => {
   }, [changedServerDataFlag]);
 
   return (
-    <ContextStorage.Provider value={valueObject}>
+    <ContextStorage.Provider value={contextValues}>
       <Header />
       <Main />
       <Footer />

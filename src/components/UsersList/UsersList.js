@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { User } from "./User/User";
-import { ContextStorage } from "../../common/ContextStorage";
+import { ContextStorage } from "../../storage/ContextStorage";
 import { SearchingToolbar } from "./SearchingToolbar/SearchingToolbar";
 import "./UsersList.scss";
 

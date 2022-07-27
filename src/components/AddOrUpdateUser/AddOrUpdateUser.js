@@ -16,7 +16,7 @@ import {
   validateData,
   createFormData,
 } from "./addOrUpdateUserHelpers";
-import { ContextStorage } from "../../common/ContextStorage";
+import { ContextStorage } from "../../storage/ContextStorage";
 import "./AddOrUpdateUser.scss";
 
 export const AddOrUpdateUser = ({ isUpdating = false }) => {
