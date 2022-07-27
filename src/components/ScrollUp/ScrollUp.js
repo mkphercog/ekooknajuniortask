@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import "./ScrollUp.scss";
 
 export const ScrollUp = () => {
-  let [position, setPosition] = useState(0);
+  const [position, setPosition] = useState(0);
 
   window.addEventListener("scroll", () => {
     setPosition(document.documentElement.scrollTop);
   });
 
   const handleScrollUp = () => {
-    const inter = setInterval(() => {
-      setPosition((position -= 80));
-      document.documentElement.scrollTo(0, position);
-      if (position <= 0) {
-        clearInterval(inter);
+    let newPosition = position;
+    const scrollInterval = setInterval(() => {
+      document.documentElement.scrollTo(0, (newPosition -= 80));
+
+      if (newPosition <= 0) {
+        clearInterval(scrollInterval);
+        setPosition(0);
       }
     }, 10);
   };
