@@ -33,20 +33,13 @@ export const App = () => {
   useEffect(() => {
     (async () => {
       try {
-        await fetch(GET_USERS_URL)
-          .then((res) => {
-            if (res.ok) {
-              setIsFetchError(false);
-              return res.json();
-            } else {
-              setIsFetchError(true);
-            }
-          })
-          .then((data) => {
-            setUsersData(data.users);
-          });
+        const response = await fetch(GET_USERS_URL);
+        const data = await response.json();
+        setIsFetchError(false);
+        setUsersData(data.users);
       } catch (error) {
         setIsFetchError(true);
+        console.log(error);
       }
     })();
   }, [changedServerDataFlag]);

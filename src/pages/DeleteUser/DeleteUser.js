@@ -24,23 +24,19 @@ export const DeleteUser = () => {
   useEffect(() => {
     (async () => {
       try {
-        await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`)
-          .then((res) => {
-            if (res.ok) {
-              setIsFetchError(false);
-              return res.json();
-            } else {
-              setIsFetchError(true);
-            }
-          })
-          .then((data) => {
-            setCurrentUserData(data.user);
-          });
+        const response = await fetch(
+          `${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`
+        );
+        const data = await response.json();
+        setIsFetchError(false);
+        setCurrentUserData(data.user);
       } catch (error) {
         setIsFetchError(true);
         setCurrentUserData(NOT_FOUD_USERS_DATA);
+        console.log(error);
       }
     })();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userID]);
 
@@ -50,15 +46,10 @@ export const DeleteUser = () => {
     try {
       await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
         method: "DELETE",
-      }).then((res) => {
-        if (res.ok) {
-          setIsFetchError(false);
-          setChangedServerDataFlag(!changedServerDataFlag);
-          history(routerPaths.HOME);
-        } else {
-          setIsFetchError(true);
-        }
       });
+      setIsFetchError(false);
+      setChangedServerDataFlag(!changedServerDataFlag);
+      history(routerPaths.HOME);
     } catch (error) {
       setIsFetchError(true);
     }

@@ -81,29 +81,27 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     if (userID && isUpdating) {
       (async () => {
         try {
-          await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`)
-            .then((res) => {
-              if (res.ok) {
-                setIsFetchError(false);
-                return res.json();
-              } else {
-                setIsFetchError(true);
-              }
-            })
-            .then(({ user }) => {
-              const firstPartPostalCode = user.postal_code.slice(0, 2);
-              const secondPartPostalCode = user.postal_code.slice(3, 6);
-              setFirstName(user.first_name);
-              setLastName(user.last_name);
-              setAge(user.age);
-              setFirstPartPostalCode(Number(firstPartPostalCode) || 0);
-              setSecondPartPostalCode(Number(secondPartPostalCode) || 0);
-              setCity(user.city);
-              setStreet(user.street);
-              setIsFetchError(false);
-            });
+          const response = await fetch(
+            `${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`
+          );
+          const data = await response.json();
+          const { user } = data;
+          const { postal_code, first_name, last_name, age, city, street } =
+            user;
+          const firstPartPostalCode = postal_code.slice(0, 2);
+          const secondPartPostalCode = postal_code.slice(3, 6);
+          setIsFetchError(false);
+          setFirstName(first_name);
+          setLastName(last_name);
+          setAge(age);
+          setFirstPartPostalCode(Number(firstPartPostalCode) || 0);
+          setSecondPartPostalCode(Number(secondPartPostalCode) || 0);
+          setCity(city);
+          setStreet(street);
+          setIsFetchError(false);
         } catch (error) {
           setIsFetchError(true);
+          console.log(error);
         }
       })();
     } else if (!isUpdating) {
@@ -135,18 +133,14 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
           await fetch(ADD_USER_URL, {
             method: "POST",
             body: userData,
-          }).then((res) => {
-            if (res.ok) {
-              setIsDataSend(true);
-              setIsFetchError(false);
-              setChangedServerDataFlag(!changedServerDataFlag);
-              handleClearData(event, ...arrayOfAllSettersForUserData);
-            } else {
-              setIsFetchError(true);
-            }
           });
+          setIsDataSend(true);
+          setIsFetchError(false);
+          setChangedServerDataFlag(!changedServerDataFlag);
+          handleClearData(event, ...arrayOfAllSettersForUserData);
         } catch (error) {
           setIsFetchError(true);
+          console.log(error);
         }
       })();
     } else {
@@ -171,18 +165,14 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
           await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
             method: "PUT",
             body: userData,
-          }).then((res) => {
-            if (res.ok) {
-              setIsFetchError(false);
-              setIsDataSend(true);
-              setChangedServerDataFlag(!changedServerDataFlag);
-              handleClearData(event, ...arrayOfAllSettersForUserData);
-            } else {
-              setIsFetchError(true);
-            }
           });
+          setIsFetchError(false);
+          setIsDataSend(true);
+          setChangedServerDataFlag(!changedServerDataFlag);
+          handleClearData(event, ...arrayOfAllSettersForUserData);
         } catch (error) {
           setIsFetchError(true);
+          console.log(error);
         }
       })();
     } else {
