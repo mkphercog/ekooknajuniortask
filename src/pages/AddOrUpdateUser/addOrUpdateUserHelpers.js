@@ -1,5 +1,15 @@
 import { ADD_USER_CLEAR_DATA } from "../../common/constants";
 
+const {
+  FIRST_NAME,
+  LAST_NAME,
+  FIRST_PART_POSTAL_CODE,
+  SECOND_PART_POSTAL_CODE,
+  CITY,
+  STREET,
+  AGE,
+} = ADD_USER_CLEAR_DATA;
+
 export const handleClearData = (
   event,
   setFirstName,
@@ -10,17 +20,7 @@ export const handleClearData = (
   setCity,
   setStreet
 ) => {
-  const {
-    FIRST_NAME,
-    LAST_NAME,
-    FIRST_PART_POSTAL_CODE,
-    SECOND_PART_POSTAL_CODE,
-    CITY,
-    STREET,
-    AGE,
-  } = ADD_USER_CLEAR_DATA;
-
-  event.preventDefault();
+  if (event !== null) event.preventDefault();
   setFirstName(FIRST_NAME);
   setLastName(LAST_NAME);
   setAge(AGE);
@@ -59,7 +59,7 @@ export const validateData = (
   const arrayOfStrings = [firstName, lastName, city, street];
   let isCorrect = true;
   arrayOfStrings.forEach((item) => {
-    if (item.length === 0 || item.length > 100) {
+    if (item.trim().length === 0 || item.length > 100) {
       isCorrect = false;
     }
   });

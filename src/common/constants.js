@@ -22,3 +22,15 @@ export const NOT_FOUD_USERS_DATA = {
   age: 0,
   id: -1,
 };
+
+export const INITIAL_CONTEX_USERS_STATE = [
+  {
+    first_name: "",
+    last_name: "",
+    postal_code: "",
+    street: "",
+    city: "",
+    age: 0,
+    id: -1,
+  },
+];

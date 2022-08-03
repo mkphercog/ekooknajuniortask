@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
-import { ContextStorage } from "./../../../storage/ContextStorage";
+import { FilteredUsersContext } from "../../../storage/FilteredUsersStorage";
+import { UserContext } from "./../../../storage/UserStorage";
 import { NOT_FOUD_USERS_DATA } from "./../../../common/constants";
 import { getFilteredUsers } from "./searchingToolbarFunc";
 import "./SearchingToolbar.scss";
 
 export const SearchingToolbar = () => {
   const {
-    usersData,
     setFilteredUsersData,
     setIsFilteredData,
     filteredDataValues,
     setFilteredDataValues,
-  } = useContext(ContextStorage);
+  } = useContext(FilteredUsersContext);
+  const { usersData } = useContext(UserContext);
   const { searchingLastName, searchingAgeFrom, searchingAgeTo } =
     filteredDataValues;
 

@@ -6,36 +6,50 @@ import { NewUserAddress } from "./NewUserAddress/NewUserAddress";
 import { ErrorServerMessage } from "./../../components/ErrorServerMessage/ErrorServerMessage";
 import { IncorrectInputsDataMessage } from "./IncorrectInputsDataMessage/IncorrectInputsDataMessage";
 import { CorrectSendInfo } from "./CorrectSendInfo/CorrectSendInfo";
-import {
-  ADD_USER_URL,
-  GET_DELETE_UPDATE_USER_BY_ID_URL,
-  ADD_USER_CLEAR_DATA,
-} from "../../common/constants";
+import { ADD_USER_CLEAR_DATA } from "../../common/constants";
 import {
   handleClearData,
   validateData,
   createFormData,
 } from "./addOrUpdateUserHelpers";
-import { ContextStorage } from "../../storage/ContextStorage";
+import { UserContext } from "../../storage/UserStorage";
 import "./AddOrUpdateUser.scss";
 
+const {
+  FIRST_NAME,
+  LAST_NAME,
+  FIRST_PART_POSTAL_CODE,
+  SECOND_PART_POSTAL_CODE,
+  CITY,
+  STREET,
+  AGE,
+} = ADD_USER_CLEAR_DATA;
+
 export const AddOrUpdateUser = ({ isUpdating = false }) => {
+  const { id: userIdFromParams } = useParams();
+
   const {
-    changedServerDataFlag,
-    setChangedServerDataFlag,
+    currentUserData,
+    getCurrentUserData,
+    addNewUserToServer,
     isFetchError,
     setIsFetchError,
-  } = useContext(ContextStorage);
-  const { id: userID } = useParams();
+    changedServerDataFlag,
+    setChangedServerDataFlag,
+    updateUserDataOnServer,
+    isDataSend,
+    setIsDataSend,
+  } = useContext(UserContext);
   const {
-    FIRST_NAME,
-    LAST_NAME,
-    FIRST_PART_POSTAL_CODE,
-    SECOND_PART_POSTAL_CODE,
-    CITY,
-    STREET,
-    AGE,
-  } = ADD_USER_CLEAR_DATA;
+    postal_code,
+    first_name,
+    last_name,
+    age: userAge,
+    city: userCity,
+    street: userStreet,
+    id: currentUserId,
+  } = currentUserData;
+
   const [firstName, setFirstName] = useState(FIRST_NAME);
   const [lastName, setLastName] = useState(LAST_NAME);
   const [age, setAge] = useState(AGE);
@@ -48,7 +62,6 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
   const [city, setCity] = useState(CITY);
   const [street, setStreet] = useState(STREET);
   const [isDataCorrect, setIsDataCorrect] = useState(true);
-  const [isDataSend, setIsDataSend] = useState(false);
   const fullPostalCode = `${firstPartPostalCode}-${secondPartPostalCode}`;
   const arrayOfAllSettersForUserData = [
     setFirstName,
@@ -78,46 +91,25 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
   ];
 
   useEffect(() => {
-    if (userID && isUpdating) {
-      (async () => {
-        try {
-          const response = await fetch(
-            `${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`
-          );
-          const data = await response.json();
-          const { user } = data;
-          const { postal_code, first_name, last_name, age, city, street } =
-            user;
-          const firstPartPostalCode = postal_code.slice(0, 2);
-          const secondPartPostalCode = postal_code.slice(3, 6);
-          setIsFetchError(false);
-          setFirstName(first_name);
-          setLastName(last_name);
-          setAge(age);
-          setFirstPartPostalCode(Number(firstPartPostalCode) || 0);
-          setSecondPartPostalCode(Number(secondPartPostalCode) || 0);
-          setCity(city);
-          setStreet(street);
-          setIsFetchError(false);
-        } catch (error) {
-          setIsFetchError(true);
-          console.log(error);
-        }
-      })();
-    } else if (!isUpdating) {
-      setFirstName(FIRST_NAME);
-      setLastName(LAST_NAME);
-      setAge(AGE);
-      setFirstPartPostalCode(FIRST_PART_POSTAL_CODE);
-      setSecondPartPostalCode(SECOND_PART_POSTAL_CODE);
-      setCity(CITY);
-      setStreet(STREET);
+    if (isUpdating) {
+      getCurrentUserData(userIdFromParams);
+      const firstPartPostalCode = postal_code.slice(0, 2);
+      const secondPartPostalCode = postal_code.slice(3, 6);
+      setFirstName(first_name);
+      setLastName(last_name);
+      setAge(userAge);
+      setFirstPartPostalCode(Number(firstPartPostalCode) || 0);
+      setSecondPartPostalCode(Number(secondPartPostalCode) || 0);
+      setCity(userCity);
+      setStreet(userStreet);
+    } else {
+      handleClearData(null, ...arrayOfAllSettersForUserData);
       setIsDataCorrect(true);
       setIsDataSend(false);
       setIsFetchError(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isUpdating]);
+  }, [userIdFromParams, currentUserId]);
 
   const handleAddNewUser = (event) => {
     event.preventDefault();
@@ -128,24 +120,11 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
       const userData = createFormData(
         ...arrayOfAllUserDataFromUseStateWithFullPostalCode
       );
-      (async () => {
-        try {
-          await fetch(ADD_USER_URL, {
-            method: "POST",
-            body: userData,
-          });
-          setIsDataSend(true);
-          setIsFetchError(false);
-          setChangedServerDataFlag(!changedServerDataFlag);
-          handleClearData(event, ...arrayOfAllSettersForUserData);
-        } catch (error) {
-          setIsFetchError(true);
-          console.log(error);
-        }
-      })();
+      addNewUserToServer(userData);
+      setChangedServerDataFlag(!changedServerDataFlag);
+      if (isDataSend) handleClearData(event, ...arrayOfAllSettersForUserData);
     } else {
       setIsDataCorrect(false);
-      setIsDataSend(false);
     }
   };
 
@@ -158,26 +137,10 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
       const userData = createFormData(
         ...arrayOfAllUserDataFromUseStateWithFullPostalCode
       );
-      //searching for good idea about updating data, for now not working... although adding new user with method POST works :/
-      //maybe some problem with server?
-      (async () => {
-        try {
-          await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
-            method: "PUT",
-            body: userData,
-          });
-          setIsFetchError(false);
-          setIsDataSend(true);
-          setChangedServerDataFlag(!changedServerDataFlag);
-          handleClearData(event, ...arrayOfAllSettersForUserData);
-        } catch (error) {
-          setIsFetchError(true);
-          console.log(error);
-        }
-      })();
+      updateUserDataOnServer(userIdFromParams, userData);
+      if (isDataSend) handleClearData(event, ...arrayOfAllSettersForUserData);
     } else {
       setIsDataCorrect(false);
-      setIsDataSend(false);
     }
   };
 
@@ -219,6 +182,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
           <button
             className="add-user__btn"
             onClick={(event) => {
+              event.preventDefault();
               handleClearData(event, ...arrayOfAllSettersForUserData);
               setIsDataCorrect(true);
               setIsDataSend(false);

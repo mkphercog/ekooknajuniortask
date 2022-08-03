@@ -1,17 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { User } from "./User/User";
-import { ContextStorage } from "../../storage/ContextStorage";
+import { FilteredUsersContext } from "../../storage/FilteredUsersStorage";
+import { UserContext } from "../../storage/UserStorage";
 import { SearchingToolbar } from "./SearchingToolbar/SearchingToolbar";
 import "./UsersList.scss";
 
 export const UsersList = () => {
-  const { usersData, filteredUsersData, isFilteredData } =
-    useContext(ContextStorage);
+  const { usersData, getUsersData, changedServerDataFlag } =
+    useContext(UserContext);
+  const { filteredUsersData, isFilteredData } =
+    useContext(FilteredUsersContext);
   const users = isFilteredData ? filteredUsersData : usersData;
-
   const renderUsers = users
     .map((user) => <User key={user.id} user={user} />)
     .reverse();
+
+  useEffect(() => {
+    getUsersData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [changedServerDataFlag]);
 
   return (
     <div className="list">
