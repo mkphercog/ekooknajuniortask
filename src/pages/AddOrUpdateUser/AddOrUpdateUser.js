@@ -6,7 +6,10 @@ import { NewUserAddress } from "./NewUserAddress/NewUserAddress";
 import { ErrorServerMessage } from "./../../components/ErrorServerMessage/ErrorServerMessage";
 import { IncorrectInputsDataMessage } from "./IncorrectInputsDataMessage/IncorrectInputsDataMessage";
 import { CorrectSendInfo } from "./CorrectSendInfo/CorrectSendInfo";
-import { ADD_USER_CLEAR_DATA } from "../../common/constants";
+import {
+  ADD_USER_CLEAR_DATA,
+  GET_DELETE_UPDATE_USER_BY_ID_URL,
+} from "../../common/constants";
 import {
   handleClearData,
   validateData,
@@ -30,7 +33,6 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
 
   const {
     currentUserData,
-    getCurrentUserData,
     addNewUserToServer,
     isFetchError,
     setIsFetchError,
@@ -40,15 +42,7 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     isDataSend,
     setIsDataSend,
   } = useContext(UserContext);
-  const {
-    postal_code,
-    first_name,
-    last_name,
-    age: userAge,
-    city: userCity,
-    street: userStreet,
-    id: currentUserId,
-  } = currentUserData;
+  const { id: currentUserId } = currentUserData;
 
   const [firstName, setFirstName] = useState(FIRST_NAME);
   const [lastName, setLastName] = useState(LAST_NAME);
@@ -90,18 +84,38 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
     street,
   ];
 
+  const getCurrentUserDataFromServerToRender = async () => {
+    try {
+      const response = await fetch(
+        `${GET_DELETE_UPDATE_USER_BY_ID_URL}${userIdFromParams}`
+      );
+      const data = await response.json();
+      if (data.status) {
+        setIsFetchError(false);
+        const { postal_code, first_name, last_name, age, city, street } =
+          data.user;
+        const firstPartPostalCode = postal_code.slice(0, 2);
+        const secondPartPostalCode = postal_code.slice(3, 6);
+        setFirstName(first_name);
+        setLastName(last_name);
+        setAge(age);
+        setFirstPartPostalCode(Number(firstPartPostalCode) || 0);
+        setSecondPartPostalCode(Number(secondPartPostalCode) || 0);
+        setCity(city);
+        setStreet(street);
+      } else {
+        setIsFetchError(true);
+      }
+    } catch (error) {
+      setIsFetchError(true);
+      console.log(`${error} - my error`);
+    }
+  };
+
   useEffect(() => {
     if (isUpdating) {
-      getCurrentUserData(userIdFromParams);
-      const firstPartPostalCode = postal_code.slice(0, 2);
-      const secondPartPostalCode = postal_code.slice(3, 6);
-      setFirstName(first_name);
-      setLastName(last_name);
-      setAge(userAge);
-      setFirstPartPostalCode(Number(firstPartPostalCode) || 0);
-      setSecondPartPostalCode(Number(secondPartPostalCode) || 0);
-      setCity(userCity);
-      setStreet(userStreet);
+      getCurrentUserDataFromServerToRender();
+      setIsDataSend(false);
     } else {
       handleClearData(null, ...arrayOfAllSettersForUserData);
       setIsDataCorrect(true);
@@ -138,7 +152,6 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
         ...arrayOfAllUserDataFromUseStateWithFullPostalCode
       );
       updateUserDataOnServer(userIdFromParams, userData);
-      if (isDataSend) handleClearData(event, ...arrayOfAllSettersForUserData);
     } else {
       setIsDataCorrect(false);
     }
@@ -147,7 +160,9 @@ export const AddOrUpdateUser = ({ isUpdating = false }) => {
   return (
     <div className="add-user">
       <h1 className="add-user__title">
-        {isUpdating ? "Aktualizujesz dane użytkownika" : "Dodaj użytkownika"}
+        {isUpdating
+          ? `Aktualizujesz dane użytkownika (id: ${userIdFromParams})`
+          : "Dodaj użytkownika"}
       </h1>
       <form action="submit" className="add-user__form">
         <NewUserDetails

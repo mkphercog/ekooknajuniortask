@@ -81,12 +81,13 @@ export const UserProvider = ({ children }) => {
   };
 
   const deleteUserFromServer = async (userID) => {
-    //searching for good idea about deleting data, for now not working... same problem like with a PUT method
-    //maybe some problem with server?
     try {
-      await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
-        method: "DELETE",
-      });
+      await fetch(
+        `${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}?_method=DELETE`,
+        {
+          method: "POST",
+        }
+      );
       setIsFetchError(false);
       setChangedServerDataFlag(!changedServerDataFlag);
       history(routerPaths.HOME);
@@ -96,11 +97,9 @@ export const UserProvider = ({ children }) => {
   };
 
   const updateUserDataOnServer = async (userID, userData) => {
-    //searching for good idea about updating data, for now not working... although adding new user with method POST works :/
-    //maybe some problem with server?
     try {
-      await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}`, {
-        method: "PUT",
+      await fetch(`${GET_DELETE_UPDATE_USER_BY_ID_URL}${userID}?_method=PUT`, {
+        method: "POST",
         body: userData,
       });
       setIsFetchError(false);

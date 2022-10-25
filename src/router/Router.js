@@ -20,7 +20,7 @@ export const Router = () => {
       <Route path={ADD_USER} element={<AddOrUpdateUser />} />
       <Route
         path={UPDATE_USER_WITH_ID}
-        element={<AddOrUpdateUser isUpdating={true} />}
+        element={<AddOrUpdateUser isUpdating />}
       />
       <Route path={DELETE_USER_WITH_ID} element={<DeleteUser />} />
       <Route path={ERROR_PAGE} element={<ErrorPage />} />
